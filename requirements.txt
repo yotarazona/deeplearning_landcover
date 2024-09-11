@@ -1,7 +1,10 @@
-dbfread
-fiona
-numpy
-pandas
-rasterio
-scikit-learn
-scipy
+pip
+bump2version
+wheel
+watchdog
+flake8
+tox
+coverage
+Sphinx
+twine
+grip
