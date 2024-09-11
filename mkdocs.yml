@@ -70,9 +70,8 @@ markdown_extensions:
 #         property: UA-XXXXXXXXX-X
 
 nav:
-    - About me: index.md
-    - Projects: projects.md
-    - Publications: publications.md
-    - Awards: awards.md
-    - Blogs: blogs.md
-    - Contact: contact.md
+    - Welcome: index.md
+    - 01-Downloding patches: Downloding patches.md
+    - 02-Preprocessing patches: Preprocessing patches.md
+    - 03-Training and validation: Training and validation.md
+    - 04-Predictions: Predictions.md
