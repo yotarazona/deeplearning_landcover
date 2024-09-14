@@ -15,4 +15,5 @@ For future citations of this work, please use:
 
 ## Some Sentinel-2 burned areas patches
 
+<img src="https://raw.githubusercontent.com/yotarazona/deeplearning_landcover/main/image/s2-labelingData.png" align="center" width="900"/>
 
