@@ -71,7 +71,7 @@ markdown_extensions:
 
 nav:
     - Welcome: index.md
-    - 01-Downloding patches: Downloding patches.md
+    - 01-Downloading patches: Downloding patches.md
     - 02-Preprocessing patches: Preprocessing patches.md
     - 03-Training and validation: Training and validation.md
     - 04-Predictions: Predictions.md
