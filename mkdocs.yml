@@ -1,8 +1,8 @@
-site_name: Yonatan Tarazona Coronel
+site_name: University of Coimbra, Portugal
 site_author: Yonatan T.
 
 # Copyright
-copyright: Copyright &copy; 2023 Yonatan Tarazona
+copyright: Copyright &copy; 2024 Yonatan Tarazona, Vasco Mantas and Courtney Schumacher
 
 site_url: https://geoyons.github.io
 
@@ -71,7 +71,7 @@ markdown_extensions:
 
 nav:
     - Welcome: index.md
-    - 01-Downloading patches: Downloding patches.md
+    - 01-Downloading patches: Downloading patches.md
     - 02-Preprocessing patches: Preprocessing patches.md
     - 03-Training and validation: Training and validation.md
     - 04-Predictions: Predictions.md
