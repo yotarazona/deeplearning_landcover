@@ -149,7 +149,7 @@ Map.addLayer(nbr_diff.clip(features), {'min': -0.9, 'max': 0.9}, 'NBR Difference
 Map
 ```
 
-<img src="https://raw.githubusercontent.com/yotarazona/deeplearning_landcover/main/image/downloading_patches.png" align="right" width="450"/>
+<img src="https://raw.githubusercontent.com/yotarazona/deeplearning_landcover/main/image/downloading_patches.png" align="center" width="900"/>
 
 ### 04. Downloading and exporting images
 
