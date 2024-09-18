@@ -160,7 +160,18 @@ When you export an image, the data are ordered as channels, height, width (CHW).
 The ```patchSize```, ```maxFileSize```, and ```kernelSize``` parameters are passed to the ee.Export (JavaScript) or ```ee.batch.Export``` (Python) call through a ```formatOptions``` dictionary, where keys are the names of additional parameters passed to ```Export```. Possible ```formatOptions``` for an image exported to TFRecord format are on the official GEE [documentation](https://developers.google.com/earth-engine/guides/tfrecord) page.
 
 We generated 512x512 pixel patches for both the 11 input variables (10 S2 bands + 1 dNBR) and the labeling data. Bands of Sentinel-2 used:
-- B2, B3, B4, B5, B6, B7, B8, B8A, B11 and B12 are Blue, Green, Red, Vegetation red edge 1, Vegetation red edge 2, Vegetation red Edge 3, Near infrared, Vegetation red Edge 4, Swir1 and Swir2 bands respectively.
+- B2 (Blue)
+- B3 (Green)
+- B4 (Red)
+- B5 (Vegetation red edge 1)
+- B6 (Vegetation red edge 2)
+- B7 (Vegetation red edge 3)
+- B8 (Near infrared)
+- B8A (Vegetation red edge 4)
+- B11 (SWIR1)
+- B12 (SWIR2)
+- dNBR (NBR difference)
+- label (Labeling data)
 
 ```python
 # formatOptions
