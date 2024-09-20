@@ -294,4 +294,4 @@ for i, idx in enumerate([17,15]):
   ax[1, i].get_xaxis().set_visible(True)
   ax[1, i].get_yaxis().set_visible(True)
 ```
-<img src="https://raw.githubusercontent.com/yotarazona/deeplearning_landcover/main/image/Github_web_02.png" align="center" width="400"/>
+<img src="https://raw.githubusercontent.com/yotarazona/deeplearning_landcover/main/image/Github_web_02.png" align="center" width="500"/>
