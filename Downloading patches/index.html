@@ -10,7 +10,7 @@
         <meta name="author" content="Yonatan T.">
       
       
-        <link rel="canonical" href="https://geoyons.github.io/Downloading%20patches/">
+        <link rel="canonical" href="https://yotarazona.github.io/deeplearning_landcover/Downloading%20patches/">
       
       
         <link rel="prev" href="..">
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#downloading-patches-from-google-earth-engine" class="md-skip">
+        <a href="#01-downloading-patches-from-google-earth-engine" class="md-skip">
           Skip to content
         </a>
       
@@ -432,11 +432,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#03-connecting-to-gee" class="md-nav__link">
+  <a href="#03-downloading-patches-from-gee-and-python" class="md-nav__link">
     <span class="md-ellipsis">
-      03. Connecting to GEE
+      03. Downloading patches from GEE and Python
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#04-downloading-and-exporting-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      04. Downloading and exporting images
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="04. Downloading and exporting images">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#formatoptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      formatOptions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -526,7 +550,7 @@
                   
 
 
-<h1 id="downloading-patches-from-google-earth-engine">Downloading patches from Google Earth Engine<a class="headerlink" href="#downloading-patches-from-google-earth-engine" title="Permanent link">&para;</a></h1>
+<h1 id="01-downloading-patches-from-google-earth-engine">01-Downloading patches from Google Earth Engine<a class="headerlink" href="#01-downloading-patches-from-google-earth-engine" title="Permanent link">&para;</a></h1>
 <p>Google Earth Engine (GEE) is a geospatial processing service. GEE allows users to run algorithms on georeferenced imagery and vectors stored on Google's infrastructure. The GEE API provides a library of functions which may be applied to data for display and analysis.With Earth Engine, you can perform geospatial processing at scale, powered by Google Cloud Platform. The purpose of Earth Engine is to:</p>
 <ol>
 <li>Provide an interactive platform for geospatial algorithm development at scale</li>
@@ -538,11 +562,6 @@
 <span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">ee</span>
 <span class="kn">import</span> <span class="nn">geemap</span> <span class="k">as</span> <span class="nn">emap</span>
 </code></pre></div></td></tr></table></div>
-<p>Selecting a specific basemap as follow:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">Map</span> <span class="o">=</span> <span class="n">emap</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
-<span class="n">Map</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="s2">&quot;SATELLITE&quot;</span><span class="p">)</span>
-</code></pre></div></td></tr></table></div>
 <h3 id="02-authentication-and-initialization">02. Authentication and Initialization<a class="headerlink" href="#02-authentication-and-initialization" title="Permanent link">&para;</a></h3>
 <p>Prior to using the Earth Engine Python client library, you need to authenticate and use the resultant credentials to initialize the Python client. To initialize, you will need to provide a project that you own, or have permissions to use. This project will be used for running all Earth Engine operations:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -550,7 +569,15 @@
 <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ee-geoyons&#39;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>See the <a href="https://developers.google.com/earth-engine/guides/auth">authentication guide</a> for troubleshooting and to learn more about authentication modes and Cloud projects.</p>
-<h3 id="03-connecting-to-gee">03. Connecting to GEE<a class="headerlink" href="#03-connecting-to-gee" title="Permanent link">&para;</a></h3>
+<p>Selecting a specific basemap as follow:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">Map</span> <span class="o">=</span> <span class="n">emap</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="s2">&quot;SATELLITE&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="03-downloading-patches-from-gee-and-python">03. Downloading patches from GEE and Python<a class="headerlink" href="#03-downloading-patches-from-gee-and-python" title="Permanent link">&para;</a></h3>
+<p>Patches for Deep Learning architectures are crucial for land cover disturbance mapping, including burned area mapping. A good option is to download from GEE using the Python API or JavaScript, whichever you are comfortable with. In this tutorial, the Python API will be used to stay within the Google Colab environment.</p>
+<p>A specific tile with 50x50km (i.e., 25 million pixels) from Portugal during the 2017 year will be downloaded. Labeling data known as ground truth for the same tile will be downloaded as well.</p>
+<p>Let's work on coding.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -615,13 +642,29 @@
 <span class="normal">62</span>
 <span class="normal">63</span>
 <span class="normal">64</span>
-<span class="normal">65</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">tile</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">List</span><span class="p">([</span><span class="mi">30</span><span class="p">])</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># specific tile to be used</span>
+<span class="n">tile</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">List</span><span class="p">([</span><span class="mi">17</span><span class="p">])</span>
 
+<span class="c1"># tiles for Portugal</span>
 <span class="n">port_tiles</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">(</span><span class="s2">&quot;projects/ee-geoyons/assets/tiles_portugal_50km&quot;</span><span class="p">)</span>
+<span class="c1"># labeling data - burned area during the 2017 year</span>
 <span class="n">label</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Image</span><span class="p">(</span><span class="s2">&quot;projects/ee-geoyons/assets/raster_ardida_2017&quot;</span><span class="p">)</span>
+<span class="c1"># selecting tile 17</span>
 <span class="n">features</span> <span class="o">=</span> <span class="n">port_tiles</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">inList</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">tile</span><span class="p">));</span>
 
-<span class="c1"># Define a collection</span>
+<span class="c1"># define a collection</span>
 <span class="n">colS2</span> <span class="o">=</span> <span class="s1">&#39;COPERNICUS/S2_SR_HARMONIZED&#39;</span>
 
 <span class="c1"># NBR function</span>
@@ -641,10 +684,12 @@
 
 <span class="n">bnames</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;B2&#39;</span><span class="p">,</span> <span class="s1">&#39;B3&#39;</span><span class="p">,</span> <span class="s1">&#39;B4&#39;</span><span class="p">,</span> <span class="s1">&#39;B5&#39;</span><span class="p">,</span><span class="s1">&#39;B6&#39;</span><span class="p">,</span><span class="s1">&#39;B7&#39;</span><span class="p">,</span><span class="s1">&#39;B8&#39;</span><span class="p">,</span><span class="s1">&#39;B8A&#39;</span><span class="p">,</span><span class="s1">&#39;B11&#39;</span><span class="p">,</span><span class="s1">&#39;B12&#39;</span><span class="p">]</span>
 
-<span class="c1"># Dates AFTER the fire event</span>
+<span class="c1">### ********************************* AFTER THE EVENT ******************************</span>
+<span class="c1"># dates AFTER the fire event</span>
 <span class="n">start_date_after</span> <span class="o">=</span> <span class="s1">&#39;2017-09-30&#39;</span><span class="p">;</span>
 <span class="n">end_date_after</span> <span class="o">=</span> <span class="s1">&#39;2017-12-30&#39;</span><span class="p">;</span>
 
+<span class="c1"># base satellite image as input for burned area</span>
 <span class="n">img2017</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="n">colS2</span><span class="p">)</span>\
                 <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>\
                 <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="n">start_date_after</span><span class="p">,</span> <span class="n">end_date_after</span><span class="p">)</span>\
@@ -653,6 +698,7 @@
                 <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">bnames</span><span class="p">)</span>\
                 <span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Reducer</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
 
+<span class="c1"># NBR collection computed</span>
 <span class="n">nbrColl</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="n">colS2</span><span class="p">)</span>\
                 <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>\
                 <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="n">start_date_after</span><span class="p">,</span> <span class="n">end_date_after</span><span class="p">)</span>\
@@ -662,12 +708,16 @@
                 <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">addNBR</span><span class="p">)</span>\
                 <span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Reducer</span><span class="o">.</span><span class="n">min</span><span class="p">());</span>
 
-<span class="n">nbr</span> <span class="o">=</span> <span class="n">nbrColl</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;NBR_min&#39;</span><span class="p">);</span>
+<span class="c1"># NBR after the event</span>
+<span class="n">nbr_after</span> <span class="o">=</span> <span class="n">nbrColl</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;NBR_min&#39;</span><span class="p">);</span>
 
-<span class="c1"># Dates BEFORE the fire event</span>
+<span class="c1">### ********************************* BEFORE THE EVENT ******************************</span>
+
+<span class="c1"># dates BEFORE the fire event</span>
 <span class="n">start_date_before</span> <span class="o">=</span> <span class="s1">&#39;2020-09-30&#39;</span><span class="p">;</span> <span class="c1"># &#39;2017-04-01&#39;;</span>
 <span class="n">end_date_before</span> <span class="o">=</span> <span class="s1">&#39;2020-12-30&#39;</span><span class="p">;</span> <span class="c1"># &#39;2017-06-15&#39;</span>
 
+<span class="c1"># NBR collection computed</span>
 <span class="n">nbrColl2</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="n">colS2</span><span class="p">)</span>\
                 <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">features</span><span class="p">)</span>\
                 <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="n">start_date_before</span><span class="p">,</span> <span class="n">end_date_before</span><span class="p">)</span>\
@@ -677,10 +727,14 @@
                 <span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">addNBR</span><span class="p">)</span>\
                 <span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Reducer</span><span class="o">.</span><span class="n">mean</span><span class="p">());</span>
 
+<span class="c1"># NBR before the event</span>
 <span class="n">nbr_before</span> <span class="o">=</span> <span class="n">nbrColl2</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;NBR_mean&#39;</span><span class="p">);</span>
-
-<span class="n">nbr_diff</span> <span class="o">=</span> <span class="n">nbr</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">nbr_before</span><span class="p">);</span>
+<span class="c1"># dNBR </span>
+<span class="n">nbr_diff</span> <span class="o">=</span> <span class="n">nbr_after</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">nbr_before</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
+<p>GEE has some visualization parameters for the <code>Map.addLayer()</code> function in order to enhance the image histogram values.</p>
+<p><img alt="" src="https://i.imgur.com/xpWpOal.png" /></p>
+<p><em>Courtesy</em>: <a href="https://github.com/giswqs">Qiusheng Wu</a></p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -701,42 +755,46 @@
 <span class="normal">18</span>
 <span class="normal">19</span>
 <span class="normal">20</span>
-<span class="normal">21</span>
-<span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">vizParams</span> <span class="o">=</span> <span class="p">{</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># params for base image visualization</span>
+<span class="n">vizParams</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">&quot;bands&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;B12_median&#39;</span><span class="p">,</span> <span class="s1">&#39;B8_median&#39;</span><span class="p">,</span> <span class="s1">&#39;B4_median&#39;</span><span class="p">],</span>
   <span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
   <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">3500</span><span class="p">,</span>
   <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.95</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
   <span class="p">};</span>
 
-<span class="c1"># Definimos los parametros de visualizacion</span>
+<span class="c1"># params for NBR index</span>
 <span class="n">params_nbr</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;bands&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;NBR_min&#39;</span><span class="p">],</span>
-  <span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>
+  <span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">,</span>
   <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
   <span class="s2">&quot;palette&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FFFFFF&#39;</span><span class="p">,</span><span class="s1">&#39;CC9966&#39;</span><span class="p">,</span><span class="s1">&#39;CC9900&#39;</span><span class="p">,</span><span class="s1">&#39;996600&#39;</span><span class="p">,</span> <span class="s1">&#39;33CC00&#39;</span><span class="p">,</span> <span class="s1">&#39;009900&#39;</span><span class="p">,</span><span class="s1">&#39;006600&#39;</span><span class="p">]};</span>
 
-<span class="c1"># Definimos los parametros de visualizacion</span>
-<span class="n">params_nbr_before</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="s2">&quot;bands&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;NBR_mean&#39;</span><span class="p">],</span>
-  <span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>
-  <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span>
-  <span class="s2">&quot;palette&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;FFFFFF&#39;</span><span class="p">,</span><span class="s1">&#39;CC9966&#39;</span><span class="p">,</span><span class="s1">&#39;CC9900&#39;</span><span class="p">,</span><span class="s1">&#39;996600&#39;</span><span class="p">,</span> <span class="s1">&#39;33CC00&#39;</span><span class="p">,</span> <span class="s1">&#39;009900&#39;</span><span class="p">,</span><span class="s1">&#39;006600&#39;</span><span class="p">]};</span>
-
-<span class="n">Map</span><span class="o">.</span><span class="n">centerObject</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
-<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="p">{},</span><span class="s1">&#39;Portugal tile&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">);</span>
-<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">img2017</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">vizParams</span><span class="p">,</span> <span class="s1">&#39;S2 - post-fire event 2017&#39;</span><span class="p">);</span>
-<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">nbr_before</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">params_nbr_before</span><span class="p">,</span> <span class="s1">&#39;NBR before&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">);</span>
-<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">nbr</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">params_nbr</span><span class="p">,</span> <span class="s1">&#39;NBR after&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">);</span>
-<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">nbr_diff</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="p">{</span><span class="nb">min</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.8</span><span class="p">,</span> <span class="nb">max</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span> <span class="s1">&#39;NBR Difference&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">);</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">centerObject</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="p">{},</span><span class="s1">&#39;Portugal tiles&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">);</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">img2017</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">vizParams</span><span class="p">,</span> <span class="s1">&#39;S2 - Post-fire event 2017&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">);</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">nbr_before</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;NBR_mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">params_nbr</span><span class="p">,</span> <span class="s1">&#39;NBR before&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">);</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">nbr_after</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;NBR_min&#39;</span><span class="p">),</span> <span class="n">params_nbr</span><span class="p">,</span> <span class="s1">&#39;NBR after&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">);</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">nbr_diff</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.9</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">},</span> <span class="s1">&#39;NBR Difference (dNBR)&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">);</span>
 <span class="n">Map</span>
 </code></pre></div></td></tr></table></div>
+<p><img src="https://raw.githubusercontent.com/yotarazona/deeplearning_landcover/main/image/downloading_patches.png" align="center" width="900"/></p>
+<h3 id="04-downloading-and-exporting-images">04. Downloading and exporting images<a class="headerlink" href="#04-downloading-and-exporting-images" title="Permanent link">&para;</a></h3>
+<p>When you export an image, the data are ordered as channels, height, width (CHW). The export may be split into multiple TFRecord files with each file containing one or more patches of size <code>patchSize</code>, which is user specified in the export. The size of the files in bytes is user specified in the <code>maxFileSize</code> parameter.</p>
+<h4 id="formatoptions">formatOptions<a class="headerlink" href="#formatoptions" title="Permanent link">&para;</a></h4>
+<p>The <code>patchSize</code>, <code>maxFileSize</code>, and <code>kernelSize</code> parameters are passed to the ee.Export (JavaScript) or <code>ee.batch.Export</code> (Python) call through a <code>formatOptions</code> dictionary, where keys are the names of additional parameters passed to <code>Export</code>. Possible <code>formatOptions</code> for an image exported to TFRecord format are on the official GEE <a href="https://developers.google.com/earth-engine/guides/tfrecord">documentation</a> page.</p>
+<p>We generated 512x512 pixel patches for both the 11 input variables (10 S2 bands + 1 dNBR) and the labeling data. Bands of Sentinel-2 used:
+- B2 (Blue)
+- B3 (Green)
+- B4 (Red)
+- B5 (Vegetation red edge 1)
+- B6 (Vegetation red edge 2)
+- B7 (Vegetation red edge 3)
+- B8 (Near infrared)
+- B8A (Vegetation red edge 4)
+- B11 (SWIR1)
+- B12 (SWIR2)
+- dNBR (NBR difference)
+- label (Labeling data)</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
@@ -753,21 +811,25 @@
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">export_options</span> <span class="o">=</span> <span class="p">{</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># formatOptions</span>
+<span class="n">formatOptions</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s1">&#39;patchDimensions&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">],</span> <span class="c1">#512*512</span>
   <span class="s1">&#39;maxFileSize&#39;</span><span class="p">:</span> <span class="mi">104857600</span><span class="p">,</span>
   <span class="s1">&#39;compressed&#39;</span><span class="p">:</span> <span class="kc">True</span>
 <span class="p">}</span>
 
+<span class="c1"># exporting patches to Google Drive</span>
 <span class="n">ee</span><span class="o">.</span><span class="n">batch</span><span class="o">.</span><span class="n">Export</span><span class="o">.</span><span class="n">image</span><span class="p">({</span>
-  <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="n">d3</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="o">.</span><span class="n">double</span><span class="p">(),</span>
+  <span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="n">img2017</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">features</span><span class="p">)</span><span class="o">.</span><span class="n">double</span><span class="p">(),</span>
   <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s1">&#39;PatchesExport&#39;</span><span class="p">,</span>
-  <span class="s2">&quot;fileNamePrefix&quot;</span><span class="p">:</span> <span class="s1">&#39;Port_tile30&#39;</span><span class="p">,</span>
-  <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="c1"># resolution</span>
-  <span class="s2">&quot;folder&quot;</span><span class="p">:</span> <span class="s1">&#39;California_patches_512-512_radar&#39;</span><span class="p">,</span>
+  <span class="s2">&quot;fileNamePrefix&quot;</span><span class="p">:</span> <span class="s1">&#39;Port_tile17&#39;</span><span class="p">,</span>
+  <span class="s2">&quot;scale&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="c1"># spatial resolution</span>
+  <span class="s2">&quot;folder&quot;</span><span class="p">:</span> <span class="s1">&#39;Portugal_patches_512-512_tile17&#39;</span><span class="p">,</span>
   <span class="s2">&quot;fileFormat&quot;</span><span class="p">:</span> <span class="s1">&#39;TFRecord&#39;</span><span class="p">,</span>
   <span class="s2">&quot;region&quot;</span><span class="p">:</span> <span class="n">features</span><span class="p">,</span>
-  <span class="s2">&quot;formatOptions&quot;</span><span class="p">:</span> <span class="n">export_options</span><span class="p">,</span>
+  <span class="s2">&quot;formatOptions&quot;</span><span class="p">:</span> <span class="n">formatOptions</span><span class="p">,</span>
   <span class="s2">&quot;maxPixels&quot;</span><span class="p">:</span> <span class="mf">1e+13</span><span class="p">,</span>
 <span class="p">})</span>
 </code></pre></div></td></tr></table></div>
@@ -791,7 +853,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
     </span>
-    2024-09-14
+    2024-09-23
   </span>
 
     

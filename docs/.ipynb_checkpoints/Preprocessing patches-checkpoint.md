@@ -1,4 +1,4 @@
-# 02-Preprocessing patches for burned area mapping
+# Preprocessing patches for burned area mapping
 
 In this step patches downloaded from Google Earth Engine (GEE) will be
 preprocessed as input for applying the U-net architecture in order to

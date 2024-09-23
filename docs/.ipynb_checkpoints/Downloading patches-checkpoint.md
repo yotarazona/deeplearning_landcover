@@ -1,4 +1,4 @@
-# 01-Downloading patches from Google Earth Engine
+# Downloading patches from Google Earth Engine
 
 Google Earth Engine (GEE) is a geospatial processing service. GEE allows users to run algorithms on georeferenced imagery and vectors stored on Google's infrastructure. The GEE API provides a library of functions which may be applied to data for display and analysis.With Earth Engine, you can perform geospatial processing at scale, powered by Google Cloud Platform. The purpose of Earth Engine is to:
 
