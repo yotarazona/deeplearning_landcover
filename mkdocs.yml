@@ -4,7 +4,7 @@ site_author: Yonatan T.
 # Copyright
 copyright: Copyright &copy; 2024 Yonatan Tarazona, Vasco Mantas and Courtney Schumacher
 
-site_url: https://geoyons.github.io
+site_url: https://yotarazona.github.io/deeplearning_landcover/
 
 theme:
     font:
